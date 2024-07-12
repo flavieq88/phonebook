@@ -29,10 +29,20 @@ app.get("/api/persons", (request, response)  => {
 });
 
 app.get("/info", (request, response) => {
-    const time = Date()
+    const time = Date();
     response.send(`<p>Phone has info for ${persons.length} people</p>
-        <p>${time}</p>`)
-})
+        <p>${time}</p>`);
+});
+
+app.get("/api/persons/:id", (request, response) => {
+    const id = request.params.id;
+    const person = persons.find(n => n.id === id);
+    if (person) {
+        response.json(person)
+    } else {
+        response.status(404).end()
+    };
+});
 
 const PORT = 3001;
 app.listen(PORT, () => {
