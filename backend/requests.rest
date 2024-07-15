@@ -2,6 +2,10 @@ DELETE http://localhost:3001/api/persons/3
 
 ###
 
+DELETE https://phonebook-gfw2.onrender.com/api/persons/1
+
+###
+
 DELETE http://localhost:3001/api/persons/17973
 
 ###
