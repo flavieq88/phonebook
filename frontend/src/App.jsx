@@ -42,18 +42,19 @@ const App = () => {
       setNewName('');
       setNewNumber('');
     }
-    else if (!newName || !newNumber) {
-      setNotif({message: "Missing name or number", type: "bad"});
-      setTimeout(() => {
-        setNotif({message: null, type: null})
-      }, 3000);
-
-      setNewName('');
-      setNewNumber('');
-    } else {
+    else {
       personsService
         .create(nameObject)
-        .then(response => setPersons(persons.concat(response.data)));
+        .then(response => setPersons(persons.concat(response.data)))
+        .catch(error => {
+          setNotif({message: error.response.data.error, type: "bad"});
+          setTimeout(() => {
+            setNotif({message: null, type: null})
+          }, 3000);
+
+          setNewName('');
+          setNewNumber('');
+        })
 
       setNotif({message: `Added ${nameObject.name}`, type:"good"});
       setTimeout(() => {
@@ -102,11 +103,12 @@ const App = () => {
       .update(person.id, newObject)
       .then(response => setPersons(persons.map(p => p.id !== person.id ? p : response.data)))
       .catch(error => {
-        setNotif({message: `Information of '${person.name}' was already removed from server`, type: "bad"});
+        console.log(error.response)
+        setNotif({message: error.response.data.error, type: "bad"});
         setTimeout(() => {
           setNotif({message: null, type: null})
         }, 3000);
-      setPersons(persons.filter(p => p.id !== person.id));
+        personsService.getAll().then(response => setPersons(response.data));
       });
 
       setNotif({message: `Changed ${person.name} number`, type:"good"});
