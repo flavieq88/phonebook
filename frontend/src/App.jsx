@@ -42,7 +42,15 @@ const App = () => {
       setNewName('');
       setNewNumber('');
     }
-    else {
+    else if (!newName || !newNumber) {
+      setNotif({message: "Missing name or number", type: "bad"});
+      setTimeout(() => {
+        setNotif({message: null, type: null})
+      }, 3000);
+
+      setNewName('');
+      setNewNumber('');
+    } else {
       personsService
         .create(nameObject)
         .then(response => setPersons(persons.concat(response.data)));
