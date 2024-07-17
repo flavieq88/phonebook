@@ -54,7 +54,8 @@ const App = () => {
 
           setNewName('');
           setNewNumber('');
-        })
+          return;
+        });
 
       setNotif({message: `Added ${nameObject.name}`, type:"good"});
       setTimeout(() => {
