@@ -14,8 +14,8 @@ POST http://localhost:3001/api/persons
 Content-Type: application/json
 
 {
-    "name": "police",
-    "number": 911
+    "name": "my cat",
+    "number": "234-6785665756"
 }
 
 ###

@@ -24,7 +24,7 @@ const App = () => {
 
   if (!persons) {
     return null;
-  };
+  }
 
   const addPerson = (event) => {
     event.preventDefault();
@@ -38,7 +38,7 @@ const App = () => {
         const [double] = persons.filter(person => person.name.toLowerCase() === newName.toLowerCase());
         updateNumber(double, newNumber);
         console.log("here")
-      };
+      }
       setNewName('');
       setNewNumber('');
     }
@@ -63,7 +63,7 @@ const App = () => {
 
       setNewName('');
       setNewNumber('');
-    };
+    }
   };
 
   const handleNameChange = (event) => {
@@ -89,12 +89,13 @@ const App = () => {
             setNotif({...notif, message: null})
           }, 3000)
         });
+      
       setPersons(persons.filter(n => n.id !== id));
       setNotif({message: `Deleted ${person.name}`, type: "good"});
       setTimeout(() => {
         setNotif({...notif, message: null})
       }, 3000);
-    };
+    }
   };
 
   const updateNumber = (person, number) => {
